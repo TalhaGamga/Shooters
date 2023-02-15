@@ -1,14 +1,19 @@
 
+using UnityEngine;
+
 interface IDamagable
 {
-    void TakeDamage();
+    void TakeDamage(float damage);
 
     void Die();
 }
 
 interface IDirectable
 {
-    void GoDirectedPlace();
+    void OnSelected();
+
+    void OnDeselect();
+    void MoveTo();
 }
 
 interface IMovable

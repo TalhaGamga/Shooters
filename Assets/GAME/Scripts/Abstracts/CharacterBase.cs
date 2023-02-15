@@ -1,35 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CharacterBase : MonoBehaviour, IDamagable, IMovable
+public class CharacterBase : MonoBehaviour, IDamagable
 {
+    [SerializeField] private float health;
 
-    [SerializeField] private float speed;
-
-    [SerializeField] private float damage;
-
-    [SerializeField] CharDataSO charDataSO;
+    [SerializeField] CharacterDataSO charDataSO;
 
     private void Awake()
     {
-        speed = charDataSO.speed;
-        damage = charDataSO.damage;
+        health = charDataSO.health;
+    } 
+
+    public virtual void Die()
+    {
+        Destroy(gameObject);
     }
 
-
-    public void Die()
+    public void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
-    }
+        health -= damage;
 
-    public void Move()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void TakeDamage()
-    {
-        throw new System.NotImplementedException();
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 }
