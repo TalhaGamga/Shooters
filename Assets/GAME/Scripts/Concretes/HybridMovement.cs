@@ -13,10 +13,19 @@ public class HybridMovement : MovementBase, IDirectable
 
     [SerializeField] SpriteRenderer selectionSprite;
 
-    public override void Start()
+    public override void OnEnable()
     {
-        base.Start();
-        SelectionManager.Instance.availableUnits.Add(this);
+        base.OnEnable();
+        SelectionManager.Instance.AddToList(this);
+
+        navMesh.stoppingDistance = 5;
+    }
+    public override void OnDisable()
+    {
+        SelectionManager.Instance.RemoveFromList(this);
+        selectionSprite.gameObject.SetActive(false);
+
+        base.OnDisable();
     }
 
     public void MoveTo()
@@ -58,10 +67,5 @@ public class HybridMovement : MovementBase, IDirectable
 
             return;
         }
-    }
-
-    public void RemoveFromList()
-    {
-        SelectionManager.Instance.RemoveFromList(this);
     }
 }

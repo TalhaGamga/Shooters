@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SelectionManager : Singleton<SelectionManager>
 {   
-    public HashSet<HybridMovement> selectedUnits;
-    public List<HybridMovement> availableUnits;
+    public HashSet<HybridMovement> selectedUnits = new HashSet<HybridMovement>();
+    public List<HybridMovement> availableUnits = new List<HybridMovement>();
 
     public void AddToList(HybridMovement hybridMovement)
     {
@@ -13,13 +13,7 @@ public class SelectionManager : Singleton<SelectionManager>
     public void RemoveFromList(HybridMovement hybridMovement)
     {
         availableUnits.Remove(hybridMovement);
-    }
-
-    private void Start()
-    {
-        selectedUnits = new HashSet<HybridMovement>();
-
-        availableUnits = new List<HybridMovement>();
+        selectedUnits.Remove(hybridMovement);
     }
 
     public void Select(HybridMovement unit)

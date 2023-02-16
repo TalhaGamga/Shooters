@@ -24,7 +24,7 @@ public class Attack : MonoBehaviour
 
     void Fire(Vector3 initPos,Transform target)
     {
-        Projectile projectile = ProjectilePool.OnFiringProjectile?.Invoke();
+        Projectile projectile = ProjectilePool.OnGettingFromPool?.Invoke();
         projectile.transform.position = initPos;
         projectile.SetProjectile(teamTag, projectileColor);
 

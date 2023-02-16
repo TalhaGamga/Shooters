@@ -11,6 +11,16 @@ public class PlayerInput : MonoBehaviour
 
     private Vector2 startMousePosition;
 
+    private void OnEnable()
+    {
+        EventManager.OnGameEnd += StopHandling;    
+    }
+
+    private void OnDisable()
+    {
+        EventManager.OnGameEnd -= StopHandling;
+    }
+
     private void Update()
     {
         HandleSelectionInputs();
@@ -78,5 +88,10 @@ public class PlayerInput : MonoBehaviour
     {
         return position.x > bounds.min.x && position.x < bounds.max.x
             && position.y > bounds.min.y && position.y < bounds.max.y; 
+    }
+
+    void StopHandling()
+    {
+        GetComponent<PlayerInput>().enabled = false;
     }
 }

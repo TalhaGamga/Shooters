@@ -76,7 +76,7 @@ public class TargetDetector : MonoBehaviour
         {
             Vector3 targetDir = (target.position - transform.position).normalized;
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 500 * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 2500 * Time.deltaTime);
 
             currentFireTimer -= Time.deltaTime;
 
@@ -97,5 +97,4 @@ public class TargetDetector : MonoBehaviour
 
         this.target = targetHouse;
     }
-
 }

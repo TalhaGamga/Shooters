@@ -5,7 +5,6 @@ public class Player : CharacterBase
 {
     public override void Die()
     {
-        GetComponent<HybridMovement>().RemoveFromList();
         base.Die();
     }
 }

@@ -14,31 +14,29 @@ public abstract class MovementBase : MonoBehaviour, IMovable
 
     public TargetDetector targetDetector;
 
-    [SerializeField] Transform targetHouse;
-
     public delegate void MovementDel();
 
     public MovementDel movement;
 
-    bool isAbleMove = true;
     public virtual void OnEnable()
     {
         targetDetector.OnSettingTarget += SetTargetAutomatically;
+
+        movement = Move;
+
+        EventManager.OnGameEnd += StopMoving;
     }
 
     public virtual void OnDisable()
     {
         targetDetector.OnSettingTarget -= SetTargetAutomatically;
-    }
 
-    public virtual void Start()
-    {
-        movement = Move;
+        EventManager.OnGameEnd -= StopMoving;
     }
 
     public virtual void Update()
     {
-        movement();
+            movement();   
     }
 
     public void Move()
@@ -48,7 +46,7 @@ public abstract class MovementBase : MonoBehaviour, IMovable
             return;
         }
 
-        
+
         navMesh.SetDestination(target.position);
     }
 
@@ -57,16 +55,8 @@ public abstract class MovementBase : MonoBehaviour, IMovable
         this.target = target;
     }
 
-    public void InitMovement(Transform targetHouse)
-    {
-        this.targetHouse = targetHouse;
-
-        this.target = targetHouse;
-    }
-
     void StopMoving()
     {
-        isAbleMove = false;
-        movement = null;
+        GetComponent<MovementBase>().enabled = false;
     }
 }

@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  currentHealth: 0
   charDataSO: {fileID: 11400000, guid: b8922d837acfb694e80424f81d0b2275, type: 2}
 --- !u!114 &-644513914463369090
 MonoBehaviour:
@@ -187,7 +188,7 @@ MonoBehaviour:
   scanLayer:
     serializedVersion: 2
     m_Bits: 2048
-  fireTimer: 0.5
+  fireTimer: 0.3
   firePoint: {fileID: 2639342704870112403}
 --- !u!114 &-7072516718923503580
 MonoBehaviour:
@@ -204,7 +205,6 @@ MonoBehaviour:
   navMesh: {fileID: -8589599568616010451}
   target: {fileID: 0}
   targetDetector: {fileID: -644513914463369090}
-  targetHouse: {fileID: 0}
   selectedPoint: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
