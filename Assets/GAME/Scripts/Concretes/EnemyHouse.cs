@@ -18,6 +18,8 @@ public class EnemyHouse : HouseBase
 
     private IEnumerator IESpawnCharacter()
     {
+        yield return new WaitForSeconds(.5f);
+
         while (true)
         {
             Enemy enemy = EnemyPool.OnGettingFromPool?.Invoke();

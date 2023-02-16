@@ -8,17 +8,27 @@ public class HybridMovement : MovementBase, IDirectable
     [SerializeField] Vector3 selectedPoint;
 
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] LayerMask enemyLayer;
+
     [SerializeField] LayerMask enemyHouseLayer;
 
     [SerializeField] SpriteRenderer selectionSprite;
+
+    float stoppingDistance;
+
+    Coroutine switchAutoMove;
+
+    Vector3 targetDir;
+    private void Awake()
+    {
+        stoppingDistance = navMesh.stoppingDistance;
+    }
 
     public override void OnEnable()
     {
         base.OnEnable();
         SelectionManager.Instance.AddToList(this);
 
-        navMesh.stoppingDistance = 5;
+        navMesh.stoppingDistance = stoppingDistance;
     }
     public override void OnDisable()
     {
@@ -30,6 +40,10 @@ public class HybridMovement : MovementBase, IDirectable
 
     public void MoveTo()
     {
+        targetDir = (selectedPoint - transform.position).normalized;
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 500 * Time.deltaTime);
+
         navMesh.SetDestination(selectedPoint);
     }
 
@@ -49,23 +63,42 @@ public class HybridMovement : MovementBase, IDirectable
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
-        {
-            selectedPoint = hit.point;
-            navMesh.stoppingDistance = 1f + interval*.5f;
-            movement = MoveTo;
-
-            return;
-        }
-
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemyHouseLayer))
         {
-            Debug.Log("EnemyHouse");
-
-            navMesh.stoppingDistance = 5f;
+            navMesh.stoppingDistance = stoppingDistance;
             movement = Move;
 
             return;
         }
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer))
+        {
+            selectedPoint = hit.point;
+            navMesh.stoppingDistance = 1f + interval * .5f;
+            movement = MoveTo;
+
+            if (switchAutoMove != null)
+            {
+                StopCoroutine(switchAutoMove);
+
+                switchAutoMove = StartCoroutine(SwitchAutomaticMovement());
+
+                return;
+            }
+
+            switchAutoMove = StartCoroutine(SwitchAutomaticMovement());
+        }
+    }
+
+    private IEnumerator SwitchAutomaticMovement()
+    {
+        yield return new WaitForSeconds(5f);
+
+        navMesh.stoppingDistance = stoppingDistance;
+        movement = Move;
+
+        StopCoroutine(switchAutoMove);
+
+        switchAutoMove = null;
     }
 }

@@ -81,7 +81,7 @@ NavMeshAgent:
   m_Speed: 5
   m_Acceleration: 500
   avoidancePriority: 50
-  m_AngularSpeed: 500
+  m_AngularSpeed: 100
   m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
@@ -103,7 +103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  currentHealth: 0
   charDataSO: {fileID: 11400000, guid: b8922d837acfb694e80424f81d0b2275, type: 2}
+  price: 70
 --- !u!114 &4123254487924296263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +143,6 @@ MonoBehaviour:
   navMesh: {fileID: 2656216973317621502}
   target: {fileID: 0}
   targetDetector: {fileID: 4123254487924296263}
-  targetHouse: {fileID: 0}
 --- !u!114 &45301068672499312
 MonoBehaviour:
   m_ObjectHideFlags: 0
