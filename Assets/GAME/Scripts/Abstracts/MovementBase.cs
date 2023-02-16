@@ -18,9 +18,6 @@ public abstract class MovementBase : MonoBehaviour, IMovable
 
     public MovementDel movement;
 
-    public float randomDistance = 5f;
-    public float destinationRadius = 0.5f;
-
     public virtual void OnEnable()
     {
         targetDetector.OnSettingTarget += SetTargetAutomatically;
@@ -48,6 +45,10 @@ public abstract class MovementBase : MonoBehaviour, IMovable
         {
             return;
         }
+
+        Vector3 targetDir = (target.position - transform.position).normalized;
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 2500 * Time.deltaTime);
 
         navMesh.SetDestination(target.position);
     }

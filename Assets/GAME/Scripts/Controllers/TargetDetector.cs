@@ -65,6 +65,10 @@ public class TargetDetector : MonoBehaviour
                     target = tempCollider.transform;
                 }
             }
+
+            Vector3 targetDir = (target.position - transform.position).normalized;
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 2500 * Time.deltaTime);
         }
 
         else
@@ -74,10 +78,6 @@ public class TargetDetector : MonoBehaviour
 
         if (target && Vector3.Distance(transform.position, target.position) < aimRange)
         {
-            Vector3 targetDir = (target.position - transform.position).normalized;
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 2500 * Time.deltaTime);
-
             currentFireTimer -= Time.deltaTime;
 
             if (currentFireTimer < 0)

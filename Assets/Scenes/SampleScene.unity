@@ -396,7 +396,7 @@ MonoBehaviour:
   hpBar: {fileID: 1533895092}
   spawnLevel: 1
   spawnUpgradeFactory: 10
-  updateTime: 10
+  updateTime: 25
 --- !u!65 &321756689
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1740,6 +1740,10 @@ PrefabInstance:
     - target: {fileID: 6038508359515656542, guid: 802c276daf9d9bf449816f8007ff1fd3, type: 3}
       propertyPath: m_Name
       value: PlayerHouse
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038508359515656542, guid: 802c276daf9d9bf449816f8007ff1fd3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6038508359515656542, guid: 802c276daf9d9bf449816f8007ff1fd3, type: 3}
       propertyPath: m_TagString
