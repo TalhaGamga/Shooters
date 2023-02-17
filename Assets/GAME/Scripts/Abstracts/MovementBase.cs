@@ -18,6 +18,7 @@ public abstract class MovementBase : MonoBehaviour, IMovable
 
     public MovementDel movement;
 
+    [SerializeField] Animator anim;
     public virtual void OnEnable()
     {
         targetDetector.OnSettingTarget += SetTargetAutomatically;
@@ -36,7 +37,7 @@ public abstract class MovementBase : MonoBehaviour, IMovable
 
     public virtual void Update()
     {
-            movement();   
+        movement();
     }
 
     public void Move()
@@ -46,11 +47,8 @@ public abstract class MovementBase : MonoBehaviour, IMovable
             return;
         }
 
-        Vector3 targetDir = (target.position - transform.position).normalized;
-
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 2500 * Time.deltaTime);
-
         navMesh.SetDestination(target.position);
+        RunAnim();
     }
 
     public void SetTargetAutomatically(Transform target)
@@ -61,5 +59,18 @@ public abstract class MovementBase : MonoBehaviour, IMovable
     void StopMoving()
     {
         GetComponent<MovementBase>().enabled = false;
+    }
+
+    public void RunAnim()
+    {
+        if ((navMesh.remainingDistance > navMesh.stoppingDistance + 1f))
+        {
+            anim.SetFloat("Speed", 1);
+        }
+
+        else
+        {
+            anim.SetFloat("Speed", 0);
+        }
     }
 }

@@ -8,7 +8,6 @@ using System;
 public class TargetDetector : MonoBehaviour
 {
     [SerializeField] private Collider[] targetColliders;
-
     int targetLen;
 
     public Transform targetHouse;
@@ -16,20 +15,18 @@ public class TargetDetector : MonoBehaviour
     [SerializeField] Transform target;
 
     [SerializeField] float scanRadius = 6;
-
     [SerializeField] float aimRange = 6;
-
+   
     [SerializeField] LayerMask scanLayer;
 
     public Action<Transform> OnSettingTarget;
 
     [SerializeField] float fireTimer = .5f;
-
+    float currentFireTimer;
     [SerializeField] Transform firePoint;
 
     public Action<Vector3, Transform> OnEnableFire;
 
-    float currentFireTimer;
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
@@ -64,11 +61,11 @@ public class TargetDetector : MonoBehaviour
                 {
                     target = tempCollider.transform;
                 }
+
+                Vector3 targetDir = (target.position - transform.position).normalized;
+
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 2500 * Time.deltaTime);
             }
-
-            Vector3 targetDir = (target.position - transform.position).normalized;
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 2500 * Time.deltaTime);
         }
 
         else

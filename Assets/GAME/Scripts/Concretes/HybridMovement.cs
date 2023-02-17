@@ -9,7 +9,7 @@ public class HybridMovement : MovementBase, IDirectable
 
     [SerializeField] LayerMask groundLayer;
 
-    [SerializeField] LayerMask enemyHouseLayer;
+    [SerializeField] LayerMask enemyLayer;
 
     [SerializeField] SpriteRenderer selectionSprite;
 
@@ -45,6 +45,8 @@ public class HybridMovement : MovementBase, IDirectable
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(targetDir), 500 * Time.deltaTime);
 
         navMesh.SetDestination(selectedPoint);
+
+        RunAnim();
     }
 
     public void OnDeselect()
@@ -63,7 +65,7 @@ public class HybridMovement : MovementBase, IDirectable
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemyHouseLayer))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, enemyLayer))
         {
             navMesh.stoppingDistance = stoppingDistance;
             movement = Move;

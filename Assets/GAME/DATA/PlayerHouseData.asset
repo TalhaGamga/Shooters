@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b024e1ecf62152946890b3dac1a30199, type: 3}
   m_Name: PlayerHouseData
   m_EditorClassIdentifier: 
-  spawnInterval: 5
+  spawnInterval: 3
   health: 500
   color: {r: 0, g: 0.69411767, b: 0.7529412, a: 1}
