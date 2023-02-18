@@ -12,16 +12,12 @@ public class UiManager : MonoBehaviour
     {
         EventManager.OnGettingAbbreviation += GetAbbreviation;
 
-        EventManager.OnSettingPassiveIncome += SetMoneyText;
-
         EventManager.OnSettingMoney += SetMoneyText;
     }
 
     private void OnDisable()
     {
         EventManager.OnGettingAbbreviation -= GetAbbreviation;
-
-        EventManager.OnSettingPassiveIncome -= SetMoneyText;
 
         EventManager.OnSettingMoney -= SetMoneyText;
     }

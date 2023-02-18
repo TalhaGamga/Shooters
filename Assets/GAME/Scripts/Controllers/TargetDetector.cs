@@ -73,7 +73,7 @@ public class TargetDetector : MonoBehaviour
             target = targetHouse;
         }
 
-        if (target && Vector3.Distance(transform.position, target.position) < aimRange)
+        if (target && Vector3.Distance(transform.position, target.position) <= aimRange)
         {
             currentFireTimer -= Time.deltaTime;
 

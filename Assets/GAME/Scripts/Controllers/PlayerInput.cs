@@ -49,7 +49,7 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && SelectionManager.Instance.selectedUnits.Count > 0)
         {
             int interval = 0;
-
+            
             foreach (HybridMovement hybridMovement in SelectionManager.Instance.selectedUnits)
             {
                 if (hybridMovement)

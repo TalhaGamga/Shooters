@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyHouseData
   m_EditorClassIdentifier: 
   spawnInterval: 3
-  health: 500
+  health: 100
   color: {r: 0.8392157, g: 0, b: 0.10980392, a: 1}

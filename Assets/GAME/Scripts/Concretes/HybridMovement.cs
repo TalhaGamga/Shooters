@@ -94,7 +94,7 @@ public class HybridMovement : MovementBase, IDirectable
 
     private IEnumerator SwitchAutomaticMovement()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(15f);
 
         navMesh.stoppingDistance = stoppingDistance;
         movement = Move;

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+
 public class EventManager 
 {
     public static Action OnGameStarted;
@@ -12,7 +13,9 @@ public class EventManager
 
     public static Action<ShopItemBase> OnPurchasingShopItem;
 
-    public static Action<float> OnSettingPassiveIncome;
-
     public static Action<float> OnSettingMoney;
+
+    public static Action OnEnemyKilled;
+
+    public static Func<int, bool> OnPlayButtonPressed;
 }

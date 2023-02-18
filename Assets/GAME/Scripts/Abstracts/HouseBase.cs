@@ -13,25 +13,28 @@ public abstract class HouseBase : MonoBehaviour, IDamagable
 
     public Transform targetHouse;
 
-    [SerializeField] Renderer _renderer;
-
     public Transform spawnPoint;
 
     public Coroutine IESpawnCharacterCor;
 
     [SerializeField] HpBar hpBar;
 
+    [SerializeField] ParticleSystem dieEffect;
 
     public int spawnLevel = 0;
     [SerializeField] int spawnUpgradeFactory = 10;
     public virtual void OnEnable()
     {
         EventManager.OnGameEnd += StopSpawning;
+
+        EventManager.OnGameStarted += InitHouse;
     }
 
     public virtual void OnDisable()
     {
         EventManager.OnGameEnd -= StopSpawning;
+
+        EventManager.OnGameStarted -= InitHouse;
     }
 
     public virtual void Start()
@@ -40,14 +43,16 @@ public abstract class HouseBase : MonoBehaviour, IDamagable
         currentHealth = health; 
 
         spawnInterval = houseDataSO.spawnInterval;
-
-        _renderer.material.color = houseDataSO.color;
     }
 
     public void Die()
     {
         EventManager.OnGameEnd?.Invoke();
 
+        dieEffect.gameObject.transform.SetParent(null);
+
+        dieEffect.Play();
+        
         gameObject.SetActive(false);
     }
 
@@ -77,8 +82,16 @@ public abstract class HouseBase : MonoBehaviour, IDamagable
 
     public virtual void UpgradeSpawn()
     {
+        if (spawnUpgradeFactory>0)
+        {
             spawnInterval -= UpgradeManager.Instance.CalculateIncreasingValue(spawnUpgradeFactory, 0.02f);
             spawnUpgradeFactory--;
             spawnLevel++;
+        }
     }
+
+    public abstract IEnumerator IESpawnCharacter();
+
+    public abstract void InitHouse();
+    
 }

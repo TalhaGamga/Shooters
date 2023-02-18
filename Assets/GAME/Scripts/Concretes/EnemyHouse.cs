@@ -11,12 +11,9 @@ public class EnemyHouse : HouseBase
     public override void Start()
     {
         base.Start();
-        IESpawnCharacterCor = StartCoroutine(IESpawnCharacter());
-
-        StartCoroutine(IEUpgradeSpawn());
     }
 
-    private IEnumerator IESpawnCharacter()
+    public override IEnumerator IESpawnCharacter()
     {
         yield return new WaitForSeconds(.5f);
 
@@ -50,5 +47,12 @@ public class EnemyHouse : HouseBase
 
             yield return null;
         }
+    }
+
+    public override void InitHouse()
+    {
+        IESpawnCharacterCor = StartCoroutine(IESpawnCharacter());
+
+        StartCoroutine(IEUpgradeSpawn());
     }
 }

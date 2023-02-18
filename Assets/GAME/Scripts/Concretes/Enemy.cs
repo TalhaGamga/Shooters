@@ -11,5 +11,7 @@ public class Enemy : CharacterBase
         base.Die();
 
         EventManager.OnSettingMoney?.Invoke(price);
+
+        EventManager.OnEnemyKilled?.Invoke();
     }
 }
