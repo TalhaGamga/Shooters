@@ -15,7 +15,6 @@ public class MoneyManager : MonoBehaviour
         EventManager.OnSettingMoney += SetMoney;
         EventManager.OnGameEnd += StopPassiveIncome;
 
-        EventManager.OnGameStarted += StartPassiveIncome;
     }
 
     private void OnDisable()
@@ -24,7 +23,6 @@ public class MoneyManager : MonoBehaviour
         EventManager.OnSettingMoney -= SetMoney;
         EventManager.OnGameEnd -= StopPassiveIncome;
 
-        EventManager.OnGameStarted += StartPassiveIncome;
     }
 
     private void Update()
@@ -63,11 +61,6 @@ public class MoneyManager : MonoBehaviour
         }
     }
 
-    private void SetPassiveIncome(float money)
-    {
-        totalMoney += money;
-    }
-     
     private void StopPassiveIncome()
     {
         GetComponent<MoneyManager>().enabled = false;

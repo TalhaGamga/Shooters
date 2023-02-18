@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 public class Menu : MonoBehaviour
 {
     [SerializeField] GameObject inGameUi;
@@ -62,7 +64,7 @@ public class Menu : MonoBehaviour
             StartButton.SetActive(true);
 
             fakeButtons.SetActive(false);
-
+            
             return true;
         }
 
