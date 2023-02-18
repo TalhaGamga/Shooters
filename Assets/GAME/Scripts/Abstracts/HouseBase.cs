@@ -93,5 +93,4 @@ public abstract class HouseBase : MonoBehaviour, IDamagable
     public abstract IEnumerator IESpawnCharacter();
 
     public abstract void InitHouse();
-    
 }

@@ -17,14 +17,13 @@ public class Menu : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.OnPlayButtonPressed += PlayButton;    
+        EventManager.OnPlayButtonPressed += PlayButton;
     }
 
     private void OnDisable()
     {
         EventManager.OnPlayButtonPressed -= PlayButton;
     }
-
 
     public void StartGame()
     {
